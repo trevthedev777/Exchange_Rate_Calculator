@@ -24,8 +24,11 @@ function calculate() {
         const rate = data.conversion_rates[currencyTwo];
         // console.log(rate);
 
-        rateElement.innerText = `1 ${currencyOne} = ${rate}`;
-   });
+        rateElement.innerText = `1 ${currencyOne} = ${rate} ${currencyTwo}`;
+
+        amountElementTwo.value = (amountElementOne.value * rate).toFixed(2);
+        console.log(amountElementTwo.value)
+   }); 
 };
 
 
@@ -34,6 +37,13 @@ currencyElementOne.addEventListener("change", calculate);
 amountElementOne.addEventListener("input", calculate);
 currencyElementTwo.addEventListener("change", calculate);
 amountElementTwo.addEventListener("input", calculate);
+
+swap.addEventListener("click", () => {
+    const temp = currencyElementOne.value;
+    currencyElementOne.value = currencyElementTwo.value;
+    currencyElementTwo.value = temp;
+    calculate();
+});
 
 calculate(); 
 
